@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="create users table" author="Trokhin">
+        <sql>
+            CREATE TABLE public.users
+            (
+            user_id bigserial PRIMARY KEY NOT NULL,
+            first_name varchar(50) NOT NULL,
+            last_name varchar(50),
+            email varchar(50) NOT NULL,
+            password varchar(25) NOT NULL,
+            active boolean,
+            birthday time NOT NULL
+            );
+            CREATE UNIQUE INDEX users_user_id_uindex ON public.users (user_id);
+            COMMENT ON TABLE public.users IS 'users table';
+        </sql>
+    </changeSet>
+
+    <changeSet id="create tours table" author="Trokhin">
+        <sql>
+            CREATE TABLE public.tours
+            (
+            tour_id bigserial PRIMARY KEY NOT NULL,
+            name varchar(50) NOT NULL,
+            description varchar(500),
+            location varchar(50) NOT NULL,
+            start_date time NOT NULL,
+            end_date time NOT NULL,
+            count_limit int NOT NULL
+            );
+            CREATE UNIQUE INDEX tours_tour_id_uindex ON public.tours (tour_id);
+            COMMENT ON TABLE public.tours IS 'tours table';
+        </sql>
+    </changeSet>
+
+    <changeSet id="create orders table" author="Trokhin">
+        <sql>
+            CREATE TABLE public.orders
+            (
+            order_id bigserial PRIMARY KEY NOT NULL,
+            confirmed boolean NOT NULL,
+            time_key time NOT NULL,
+            user_id bigint NOT NULL,
+            tour_id bigint NOT NULL,
+            CONSTRAINT orders_tours_tour_id_fk FOREIGN KEY (tour_id) REFERENCES public.tours (tour_id) ON DELETE CASCADE ON UPDATE CASCADE,
+            CONSTRAINT orders_users_user_id_fk FOREIGN KEY (user_id) REFERENCES public.users (user_id) ON DELETE CASCADE ON UPDATE CASCADE
+            );
+            CREATE UNIQUE INDEX orders_order_id_uindex ON public.orders (order_id);
+            COMMENT ON TABLE public.orders IS 'orders table';
+        </sql>
+    </changeSet>
+</databaseChangeLog>
