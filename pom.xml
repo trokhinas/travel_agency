@@ -6,7 +6,12 @@
 
     <groupId>com.digitalleague</groupId>
     <artifactId>travel_agency</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+
+    <modules>
+        <module>database</module>
+    </modules>
 
 
     <properties>
