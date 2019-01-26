@@ -110,4 +110,12 @@ public class TA_TourEntity {
     public int hashCode() {
         return Objects.hash(tourId, name, description, location, startDate, endDate, countLimit);
     }
+
+    public List<TA_OrderEntity> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<TA_OrderEntity> orders) {
+        this.orders = orders;
+    }
 }

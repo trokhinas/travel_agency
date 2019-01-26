@@ -40,7 +40,8 @@
             email varchar(50) NOT NULL,
             password varchar(25) NOT NULL,
             active boolean NOT NULL,
-            birthday timestamp NOT NULL
+            birthday timestamp NOT NULL,
+            nickname varchar(50)
             );
             CREATE UNIQUE INDEX users_user_id_uindex ON public.users (user_id);
             COMMENT ON TABLE public.users IS 'users table';

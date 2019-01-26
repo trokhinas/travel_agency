@@ -66,4 +66,20 @@ public class TA_OrderEntity {
     public int hashCode() {
         return Objects.hash(orderId, confirmed, timeKey);
     }
+
+    public TA_UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(TA_UserEntity user) {
+        this.user = user;
+    }
+
+    public TA_TourEntity getTour() {
+        return tour;
+    }
+
+    public void setTour(TA_TourEntity tour) {
+        this.tour = tour;
+    }
 }
