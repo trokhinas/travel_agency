@@ -1,7 +1,8 @@
-package Entity;
+package com.digital_league.Entity;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -15,6 +16,9 @@ public class TA_UserEntity {
     private String password;
     private boolean active;
     private Date birthday;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    private List<TA_OrderEntity> orders;
 
 
     @Id

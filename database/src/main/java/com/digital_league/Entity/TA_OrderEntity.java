@@ -1,4 +1,4 @@
-package Entity;
+package com.digital_league.Entity;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -11,6 +11,14 @@ public class TA_OrderEntity {
     private long orderId;
     private boolean confirmed;
     private Date timeKey;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "userId", referencedColumnName = "user_id")
+    private TA_UserEntity user;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "tourId", referencedColumnName = "tour_id")
+    private TA_TourEntity tour;
 
 
     @Id
