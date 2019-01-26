@@ -1,6 +1,6 @@
-package Repository;
+package com.digital_league.Repository;
 
-import Entity.TA_TourEntity;
+import com.digital_league.Entity.TA_TourEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TA_TourRepository extends JpaRepository<TA_TourEntity, Long> {
