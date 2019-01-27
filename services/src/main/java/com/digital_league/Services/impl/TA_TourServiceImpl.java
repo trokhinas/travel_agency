@@ -7,10 +7,12 @@ import com.digital_league.Mappers.TA_TourMapper;
 import com.digital_league.Repository.TA_TourRepository;
 import com.digital_league.Services.SimpleService;
 import com.digital_league.Services.TA_TourService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class TA_TourServiceImpl implements SimpleService<TA_TourDTO, Long>, SimpleMapper<TA_TourEntity, TA_TourDTO> {
 
     private final TA_TourRepository tourRepository;

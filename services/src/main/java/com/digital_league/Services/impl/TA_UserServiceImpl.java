@@ -5,10 +5,12 @@ import com.digital_league.Entity.TA_UserEntity;
 import com.digital_league.Mappers.TA_UserMapper;
 import com.digital_league.Repository.TA_UserRepository;
 import com.digital_league.Services.TA_UserService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class TA_UserServiceImpl implements TA_UserService {
 
     private final TA_UserRepository userRepository;
