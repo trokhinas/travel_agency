@@ -8,19 +8,20 @@ import org.mapstruct.Mappings;
 import org.mapstruct.ReportingPolicy;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.ERROR, componentModel = "spring")
+
 public interface TA_OrderMapper extends SimpleMapper<TA_OrderEntity, TA_OrderDTO>{
 
     @Override
     @Mappings({
             @Mapping(target = "orderId", ignore = true),
-            @Mapping(target = "tourId", ignore = true),
-            @Mapping(target = "userId", ignore = true)
+            @Mapping(target = "tour", ignore = true),
+            @Mapping(target = "user", ignore = true)
     })
     TA_OrderEntity fromDTO(TA_OrderDTO dto);
 
     @Mappings({
-            @Mapping(target = "tour", ignore = true),
-            @Mapping(target = "user", ignore = true)
+            @Mapping(target = "tourId", ignore = true),
+            @Mapping(target = "userId", ignore = true)
     })
     @Override
     TA_OrderDTO toDTO(TA_OrderEntity entity);

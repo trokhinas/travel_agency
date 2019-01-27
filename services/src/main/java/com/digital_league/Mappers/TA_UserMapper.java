@@ -12,13 +12,11 @@ public interface TA_UserMapper extends SimpleMapper<TA_UserEntity, TA_UserDTO> {
 
     @Override
     @Mappings({
-            @Mapping(target = "userId", ignore = true)
+            @Mapping(target = "userId", ignore = true),
+            @Mapping(target = "orders", ignore = true)
     })
     TA_UserEntity fromDTO(TA_UserDTO ta_userDTO);
 
     @Override
-    @Mappings({
-            @Mapping(target = "orders", ignore = true)
-    })
     TA_UserDTO toDTO(TA_UserEntity ta_userEntity);
 }

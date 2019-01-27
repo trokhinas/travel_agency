@@ -12,13 +12,11 @@ public interface TA_TourMapper extends SimpleMapper<TA_TourEntity, TA_TourDTO> {
 
     @Override
     @Mappings({
-            @Mapping(target = "tourId", ignore = true)
-    })
-    TA_TourEntity fromDTO(TA_TourDTO ta_tourDTO);
-
-    @Override
-    @Mappings({
+            @Mapping(target = "tourId", ignore = true),
             @Mapping(target = "orders", ignore = true)
     })
-    TA_TourDTO toDTO(TA_TourEntity ta_tourEntity);
+    TA_TourEntity fromDTO(TA_TourDTO dto);
+
+    @Override
+    TA_TourDTO toDTO(TA_TourEntity entity);
 }
