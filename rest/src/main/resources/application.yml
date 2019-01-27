@@ -21,8 +21,8 @@ spring:
         jdbc:
           lob:
             non_contextual_creation: true
-  liquibase:
-    change-log: classpath:db/changelog-master_TA.xml
-    drop-first: true
+#  liquibase:
+#    change-log: classpath:db/changelog-master_TA.xml
+#    drop-first: true
 
 #spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true
