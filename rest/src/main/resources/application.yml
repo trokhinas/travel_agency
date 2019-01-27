@@ -2,6 +2,7 @@ server:
   port: 8081
   servlet:
     context-path: /api
+
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
@@ -15,3 +16,13 @@ spring:
     hibernate:
       ddl-auto: validate
       dialect: org.hibernate.dialect.PostgreSQL95Dialect
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+  liquibase:
+    change-log: classpath:db/changelog-master_TA.xml
+    drop-first: true
+
+#spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true
