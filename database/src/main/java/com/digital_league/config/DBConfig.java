@@ -1,4 +1,4 @@
-package com.digital_league.Config;
+package com.digital_league.config;
 
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
