@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--<changeSet id="drop structure" author="Trokhin">-->
+        <!--<sql>-->
+            <!--drop sequence if exists orders_order_id_seq cascade;-->
+            <!--drop sequence if exists tours_tour_id_seq cascade;-->
+            <!--drop sequence if exists users_user_id_seq cascade;-->
+
+            <!--drop index if exists users_user_id_uindex;-->
+            <!--drop index if exists tours_tour_id_uindex;-->
+            <!--drop index if exists orders_order_id_uindex;-->
+
+            <!--alter table if exists orders-->
+                <!--drop constraint if exists orders_tours_tour_id_fk;-->
+
+            <!--alter table if exists orders-->
+                <!--drop constraint if exists orders_users_user_id_fk;-->
+
+            <!--drop table if exists orders;-->
+            <!--drop table if exists tours;-->
+            <!--drop table if exists users;-->
+
+        <!--</sql>-->
+    <!--</changeSet>-->
+
+    <changeSet id="create users table" author="Trokhin">
+        <sql>
+            CREATE TABLE public.users
+            (
+            user_id bigserial PRIMARY KEY NOT NULL,
+            first_name varchar(50) NOT NULL,
+            last_name varchar(50) NOT NULL,
+            email varchar(50) NOT NULL,
+            password varchar(25) NOT NULL,
+            active boolean NOT NULL,
+            birthday timestamp NOT NULL,
+            nickname varchar(50)
+            );
+            CREATE UNIQUE INDEX users_user_id_uindex ON public.users (user_id);
+            COMMENT ON TABLE public.users IS 'users table';
+        </sql>
+    </changeSet>
+
+    <changeSet id="create tours table" author="Trokhin">
+        <sql>
+            CREATE TABLE public.tours
+            (
+            tour_id bigserial PRIMARY KEY NOT NULL,
+            name varchar(50) NOT NULL,
+            description varchar(500),
+            location varchar(50),
+            start_date timestamp NOT NULL,
+            end_date timestamp NOT NULL,
+            count_limit int
+            );
+            CREATE UNIQUE INDEX tours_tour_id_uindex ON public.tours (tour_id);
+            COMMENT ON TABLE public.tours IS 'tours table';
+        </sql>
+    </changeSet>
+
+    <changeSet id="create orders table" author="Trokhin">
+        <sql>
+            CREATE TABLE public.orders
+            (
+            order_id bigserial PRIMARY KEY NOT NULL,
+            confirmed boolean NOT NULL,
+            time_key timestamp,
+            user_id bigint NOT NULL,
+            tour_id bigint NOT NULL,
+            CONSTRAINT orders_tours_tour_id_fk FOREIGN KEY (tour_id) REFERENCES public.tours (tour_id) ON DELETE CASCADE ON UPDATE CASCADE,
+            CONSTRAINT orders_users_user_id_fk FOREIGN KEY (user_id) REFERENCES public.users (user_id) ON DELETE CASCADE ON UPDATE CASCADE
+            );
+            CREATE UNIQUE INDEX orders_order_id_uindex ON public.orders (order_id);
+            COMMENT ON TABLE public.orders IS 'orders table';
+        </sql>
+    </changeSet>
+
+    <changeSet id="insert test user data" author="Trokhin">
+        <insert tableName="users">
+            <column name="first_name">Anton</column>
+            <column name="last_name">Trokhin</column>
+            <column name="email">toxatr@icloud.com</column>
+            <column name="password">qwerty</column>
+            <column name="active">true</column>
+            <column name="birthday">now()</column>
+            <column name="nickname">toxatr</column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insert test tour data" author="Trokhin">
+        <insert tableName="tours">
+            <column name="name">Tour to Paris</column>
+            <column name="start_date">now()</column>
+            <column name="end_date">now()</column>
+            <column name="count_limit">15</column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insert test order data" author="Trokhin">
+        <insert tableName="orders">
+            <column name="confirmed">true</column>
+            <column name="user_id">1</column>
+            <column name="tour_id">1</column>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
