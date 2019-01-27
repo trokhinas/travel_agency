@@ -12,12 +12,8 @@ public class TA_OrderEntity {
     private boolean confirmed;
     private Date timeKey;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "userId", referencedColumnName = "user_id")
-    private TA_UserEntity user;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "tourId", referencedColumnName = "tour_id")
+    private TA_UserEntity user;
     private TA_TourEntity tour;
 
 
@@ -50,8 +46,23 @@ public class TA_OrderEntity {
         this.timeKey = timeKey;
     }
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "userId", referencedColumnName = "user_id")
+    public TA_UserEntity getUser() {
+        return user;
+    }
+    public void setUser(TA_UserEntity user) {
+        this.user = user;
+    }
 
-
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "tourId", referencedColumnName = "tour_id")
+    public TA_TourEntity getTour() {
+        return tour;
+    }
+    public void setTour(TA_TourEntity tour) {
+        this.tour = tour;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -67,19 +78,6 @@ public class TA_OrderEntity {
         return Objects.hash(orderId, confirmed, timeKey);
     }
 
-    public TA_UserEntity getUser() {
-        return user;
-    }
 
-    public void setUser(TA_UserEntity user) {
-        this.user = user;
-    }
 
-    public TA_TourEntity getTour() {
-        return tour;
-    }
-
-    public void setTour(TA_TourEntity tour) {
-        this.tour = tour;
-    }
 }

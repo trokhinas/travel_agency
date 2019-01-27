@@ -18,7 +18,7 @@ public class TA_UserEntity {
     private Date birthday;
     private String nickname;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+
     private List<TA_OrderEntity> orders;
 
 
@@ -91,6 +91,23 @@ public class TA_UserEntity {
         this.birthday = birthday;
     }
 
+    @Basic
+    @Column(name = "nickname")
+    public String getNickname() {
+        return nickname;
+    }
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    public List<TA_OrderEntity> getOrders() {
+        return orders;
+    }
+    public void setOrders(List<TA_OrderEntity> orders) {
+        this.orders = orders;
+    }
+
 
 
     @Override
@@ -111,19 +128,5 @@ public class TA_UserEntity {
         return Objects.hash(userId, firstName, lastName, email, password, active, birthday);
     }
 
-    public String getNickname() {
-        return nickname;
-    }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public List<TA_OrderEntity> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(List<TA_OrderEntity> orders) {
-        this.orders = orders;
-    }
 }

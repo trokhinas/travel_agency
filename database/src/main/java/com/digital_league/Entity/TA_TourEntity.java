@@ -17,7 +17,7 @@ public class TA_TourEntity {
     private Date endDate;
     private Integer countLimit;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "tour")
+
     private List<TA_OrderEntity> orders;
 
 
@@ -90,6 +90,14 @@ public class TA_TourEntity {
         this.countLimit = countLimit;
     }
 
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "tour" )
+    public List<TA_OrderEntity> getOrders() {
+        return orders;
+    }
+    public void setOrders(List<TA_OrderEntity> orders) {
+        this.orders = orders;
+    }
+
 
 
 
@@ -111,11 +119,5 @@ public class TA_TourEntity {
         return Objects.hash(tourId, name, description, location, startDate, endDate, countLimit);
     }
 
-    public List<TA_OrderEntity> getOrders() {
-        return orders;
-    }
 
-    public void setOrders(List<TA_OrderEntity> orders) {
-        this.orders = orders;
-    }
 }
