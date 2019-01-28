@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class TA_TourServiceImpl implements SimpleService<TA_TourDTO, Long>, SimpleMapper<TA_TourEntity, TA_TourDTO> {
+public class TA_TourServiceImpl implements TA_TourService {
 
     private final TA_TourRepository tourRepository;
     private final TA_TourMapper tourMapper;
@@ -36,7 +36,7 @@ public class TA_TourServiceImpl implements SimpleService<TA_TourDTO, Long>, Simp
         return delete(dto.getTourId());
     }
 
-    private boolean delete(long id) {
+    public boolean delete(Long id) {
         var entityOptional = tourRepository.findById(id);
         var wasDeleted = true;
 

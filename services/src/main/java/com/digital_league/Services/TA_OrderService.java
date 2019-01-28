@@ -10,4 +10,5 @@ import java.util.List;
 public interface TA_OrderService extends SimpleService<TA_OrderDTO, Long>, SimpleMapper<TA_OrderEntity, TA_OrderDTO> {
 
     public List<TA_OrderDTO> getAllOrdersByUser(TA_UserDTO dto);
+    public boolean delete(Long id);
 }

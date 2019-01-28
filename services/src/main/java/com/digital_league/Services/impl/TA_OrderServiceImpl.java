@@ -44,7 +44,7 @@ public class TA_OrderServiceImpl implements TA_OrderService {
         return delete(dto.getOrderId());
     }
 
-    private boolean delete(Long id) {
+    public boolean delete(Long id) {
         var entityOptional = orderRepository.findById(id);
         var wasDeleted = true;
 

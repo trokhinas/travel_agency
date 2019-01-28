@@ -9,4 +9,5 @@ import java.util.List;
 
 public interface TA_UserService extends SimpleService<TA_UserDTO, Long>, SimpleMapper<TA_UserEntity, TA_UserDTO> {
 
+    public boolean delete(Long id);
 }

@@ -34,7 +34,7 @@ public class TA_UserServiceImpl implements TA_UserService {
         return delete(dto.getUserId());
     }
 
-    private boolean delete(long id) {
+    public boolean delete(Long id) {
         var entityOptional = userRepository.findById(id);
         var wasDeleted = true;
 
