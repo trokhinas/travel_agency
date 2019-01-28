@@ -9,4 +9,5 @@ import java.util.List;
 public interface TA_OrderRepository extends JpaRepository<TA_OrderEntity, Long> {
 
     public List<TA_OrderEntity> findAllByUser_UserId(Long id);
+    public TA_OrderEntity findByUser_UserIdAndOrderId(Long userId, Long orderId);
 }

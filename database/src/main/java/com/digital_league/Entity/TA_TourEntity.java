@@ -23,6 +23,8 @@ public class TA_TourEntity {
 
     @Id
     @Column(name = "tour_id", nullable = false)
+    @SequenceGenerator( name = "tour_sequence", sequenceName = "tours_tour_id_seq", allocationSize = 1)
+    @GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "tour_sequence")
     public long getTourId() {
         return tourId;
     }

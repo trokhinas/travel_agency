@@ -24,6 +24,8 @@ public class TA_UserEntity {
 
     @Id
     @Column(name = "user_id", nullable = false)
+    @SequenceGenerator( name = "user_sequence", sequenceName = "users_user_id_seq", allocationSize = 1)
+    @GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "user_sequence")
     public long getUserId() {
         return userId;
     }

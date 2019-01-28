@@ -19,6 +19,8 @@ public class TA_OrderEntity {
 
     @Id
     @Column(name = "order_id", nullable = false)
+    @SequenceGenerator( name = "order_sequence", sequenceName = "orders_order_id_seq", allocationSize = 1)
+    @GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "order_sequence")
     public long getOrderId() {
         return orderId;
     }
