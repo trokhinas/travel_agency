@@ -7,28 +7,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    <!--<changeSet id="drop structure" author="Trokhin">-->
-    <!--<sql>-->
-    <!--drop sequence if exists orders_order_id_seq cascade;-->
-    <!--drop sequence if exists tours_tour_id_seq cascade;-->
-    <!--drop sequence if exists users_user_id_seq cascade;-->
 
-    <!--drop index if exists users_user_id_uindex;-->
-    <!--drop index if exists tours_tour_id_uindex;-->
-    <!--drop index if exists orders_order_id_uindex;-->
-
-    <!--alter table if exists orders-->
-    <!--drop constraint if exists orders_tours_tour_id_fk;-->
-
-    <!--alter table if exists orders-->
-    <!--drop constraint if exists orders_users_user_id_fk;-->
-
-    <!--drop table if exists orders;-->
-    <!--drop table if exists tours;-->
-    <!--drop table if exists users;-->
-
-    <!--</sql>-->
-    <!--</changeSet>-->
 
     <changeSet id="create users table" author="Trokhin">
         <sql>
@@ -45,6 +24,7 @@
             );
             CREATE UNIQUE INDEX users_user_id_uindex ON public.users (user_id);
             COMMENT ON TABLE public.users IS 'users table';
+
         </sql>
     </changeSet>
 
@@ -82,6 +62,35 @@
         </sql>
     </changeSet>
 
+    <changeSet id="create nickname function" author="Trokhin">
+        <sql>
+            drop function if exists create_nickname()
+
+            create function create_nickname()
+            returns trigger
+            language plpgsql
+            as $$
+            BEGIN
+            update users
+            set nickname = substring(email from 0 for position('@' in email));
+            return new;
+            END;
+            $$;
+
+        </sql>
+    </changeSet>
+
+    <changeSet id="create nickname trigger" author="Trokhin">
+        <sql>
+            drop trigger if exists nickname
+
+            create trigger nickname
+            after insert
+            on users
+            execute procedure create_nickname();
+        </sql>
+    </changeSet>
+
     <changeSet id="insert test user data" author="Trokhin">
         <insert tableName="users">
             <column name="first_name">Anton</column>
@@ -110,5 +119,7 @@
             <column name="tour_id">1</column>
         </insert>
     </changeSet>
+
+
 
 </databaseChangeLog>
